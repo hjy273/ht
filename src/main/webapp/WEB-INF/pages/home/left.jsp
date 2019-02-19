@@ -6,8 +6,6 @@
     <link rel="stylesheet" rev="stylesheet" type="text/css" href="${ctx}/staticfile/skin/default/css/left.css" media="all"/>
 
 	<script language="javascript" src="${ctx}/staticfile/js/common.js"></script>
-	<script language="javascript" src="${ctx}/staticfile/js/ajax/setFastMenu.js"></script>
-	<script language="javascript" src="${ctx}/staticfile/js/pngfix_map.js"></script>
 	<script type="text/javascript" src="${ctx}/staticfile/components/jquery-ui/jquery-1.2.6.js"></script>
 	<script type="text/javascript" src="${ctx}/staticfile/skin/default/js/toggle.js"></script>
  

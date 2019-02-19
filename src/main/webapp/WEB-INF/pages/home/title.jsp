@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../base.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <jsp:useBean id="now" class="java.util.Date" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -175,12 +175,12 @@
 		});
 		
 		function logout(){
-			return formSubmit("${ctx}/logout", "_top");
+			return formSubmit("${ctx}/validate/logout", "_top");
 		}
 		
 		function toModule(moduleName){
-			top.leftFrame.location.href = moduleName+'Left.action';
-			top.main.location.href = moduleName+'Main.action';
+			top.leftFrame.location.href = moduleName+'/left';
+			top.main.location.href = moduleName+'/main';
 			linkHighlightMenu(this);
 		}
 </script>
@@ -192,11 +192,9 @@
 <div class="PositionFrame_black" id="PositionFrame"></div>
 	<div id="userInfo" style="z-index:999;" onclick="HideLoginDiv()" title="点击关闭">
 		<img src="${ctx}/staticfile/skin/default/images/title/avataronline.gif" border="0" style="margin-top:-1px;"/>
-		您好：<strong>${_CURRENT_USER.userInfo.name}</strong>&nbsp;&nbsp;|
-		您所属单位：<strong>
-			<c:if test="${!empty _CURRENT_USER.dept}">
-			${_CURRENT_USER.dept.deptName}
-			</c:if>
+		您好：<strong>${userName}</strong>&nbsp;&nbsp;|
+		<strong>
+		欢迎登录！
 		</strong>&nbsp;&nbsp;
 		<img src="${ctx}/staticfile/skin/default/images/title/close.gif" border="0" />
 	</div>
@@ -214,10 +212,22 @@
 			    	<div class="mavMeau_top"></div>
 			    	<div id="mask">
 <div id="menuContent">
+		
+		<shiro:hasPermission name="系统首页">
 		<span id="topmenu" onclick="toModule('home');">系统首页</span><span id="tm_separator"></span>
+		</shiro:hasPermission>
+		
+		<shiro:hasPermission name="货运管理">
 		<span id="topmenu" onclick="toModule('cargo');">货运管理</span><span id="tm_separator"></span>
+		</shiro:hasPermission>
+	
+		<shiro:hasPermission name="基础信息">
 		<span id="topmenu" onclick="toModule('baseinfo');">基础信息</span><span id="tm_separator"></span>
+		</shiro:hasPermission>
+	
+		<shiro:hasPermission name="系统管理">
 		<span id="topmenu" onclick="toModule('sysadmin');">系统管理</span>
+		</shiro:hasPermission>
 </div>
 					<span id="rightKey" onmouseover="periodOffset(this, 'right')"><img src="${ctx}/staticfile/skin/default/images/title/right_arrow.png"/></span>
 				</div>
